@@ -87,6 +87,15 @@ The core architecture uses the **NNConv** layer from PyTorch Geometric to learn 
 
 - Transfer learning to Deep Eutectic Solvents shows promising adaptability.
 
+| Datasets | Metrics|
+|-----------|-----------------|
+| | R2 | RMSE | MAE | MARE | A20 |
+| **Deep Learning Framework** | PyTorch, PyTorch Geometric |
+| **Cheminformatics** | RDKit, OpenBabel |
+| **Data Handling** | pandas, numpy, scikit-learn, Scipy |
+| **Visualization** | matplotlib, seaborn | plotly
+| **Database Access** | NIST ILThermo data integration |
+
 ---
 
 ## Project Impact
