@@ -22,7 +22,7 @@ This project aims to address that challenge by developing a **data-driven predic
   Implements a flexible **message passing neural network** that dynamically learns edge-conditioned transformations between atom pairs.
 
 - **Transfer Learning Extension:**  
-  The trained IL model was fine-tuned for training and evaluating the **Deep Eutectic Solvents (DESs)**, demonstrating that the model trained on ILs preserved most structure–property information even when moved to a new material class (DESs).
+  The trained IL model was fine-tuned for training and evaluating the **Deep Eutectic Solvents (DESs)**.
 
 - **Comprehensive Cheminformatics Integration:**  
   Utilizes tools such as **RDKit** and **OpenBabel** for:
@@ -73,9 +73,9 @@ The core architecture uses the **NNConv** layer from PyTorch Geometric to learn 
 
 ## Datasets
 
-- **Primary IL data (training, validaton, evaluation) from:** [NIST ILThermo Database](https://ilthermo.boulder.nist.gov/)
+- **Primary ILs data (training, validaton, evaluation) from:** [NIST ILThermo Database](https://ilthermo.boulder.nist.gov/)
 - **DESs density data source for transfer learning (training, validation, evaluation) from:** https://www.sciencedirect.com/science/article/pii/S0378381222002916?via%3Dihub
-- **Additional IL density data for just testing on trained IL model from:** https://pubs.acs.org/doi/suppl/10.1021/acs.iecr.9b00130/suppl_file/ie9b00130_si_001.zip
+- **Additional ILs density data for just testing on trained IL model from:** https://pubs.acs.org/doi/suppl/10.1021/acs.iecr.9b00130/suppl_file/ie9b00130_si_001.zip
 - **Properties Modeled:** density, viscosity, conductivity, refractive index. Only density prediction was implemented for transfer learning for now.
 - **Data Processing:** includes duplicate removal, removing outliers, removing undefined liquids, and molecular pairing, etc..
 
@@ -83,18 +83,19 @@ The core architecture uses the **NNConv** layer from PyTorch Geometric to learn 
 
 ## Results and Insights
 
-- The model demonstrates strong predictive accuracy (high R², low MAE) across multiple IL property datasets.
+- The models demonstrate strong predictive accuracy (high R², low MARE) across multiple datasets.
 
-- Transfer learning to Deep Eutectic Solvents shows promising adaptability.
+- Transfer learning to Deep Eutectic Solvents shows promising adaptabilit demonstrating that the model trained on ILs preserved most structure–property information even when moved to a new material class (DESs).
 
-| Datasets | Metrics| | | | |
+| Datasets | R2 | RMSE | MAE | MARE | A20 |
 |-----------|-----------------|-----------------|-----------------|-----------------|-----------------|
-| | R2 | RMSE | MAE | MARE | A20 |
-| **Deep Learning Framework** | PyTorch, PyTorch Geometric |
-| **Cheminformatics** | RDKit, OpenBabel |
-| **Data Handling** | pandas, numpy, scikit-learn, Scipy |
-| **Visualization** | matplotlib, seaborn | plotly
-| **Database Access** | NIST ILThermo data integration |
+| **Primary ILs training data** | 0.99 | 13.16 | 8.02 | 0.007 | 1.00 |
+| **Primary ILs validation data** | 0.99 | 13.81 | 8.10 | 0.007 | 1.00 |
+| **Primary ILs Testing data** | 0.99 | 14.82 | 8.31 | 0.007 | 1.00 |
+| **Additional ILs Testing data** | 0.96 | 31.31 | 18.9 | 0.015 | 1.00 |
+| **DESs training data (transfer learning)** | 0.94 | 22.08 | 16.76 | 0.015 | 1.00 |
+| **DESs validation data (transfer learning)** | 0.94 | 20.67 | 16.69 | 0.015 | 1.00 |
+| **DESs Testing data (transfer learning)** | 0.93 | 23.51 | 17.17 | 0.015 | 1.00 |
 
 ---
 
