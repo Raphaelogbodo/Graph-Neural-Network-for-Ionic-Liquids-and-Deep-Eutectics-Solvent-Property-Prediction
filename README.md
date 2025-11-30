@@ -115,3 +115,14 @@ The core architecture uses the **NNConv** layer from PyTorch Geometric to learn 
 - Scientific Computing and Reproducible Research
 
 **It also lays the groundwork for applying AI-driven design principles to novel ionic liquid discovery and optimization.**
+
+## Folders and Description
+code/
+├── architecture.py
+├── prepare_dataset.py
+├── training.py
+├── utils.py
+├── draw_molecules.py
+├── predict.ipynb
+├── params.yaml
+└── experiment.py
