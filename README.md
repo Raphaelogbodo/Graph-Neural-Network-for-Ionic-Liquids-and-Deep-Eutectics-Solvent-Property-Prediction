@@ -1,7 +1,7 @@
-# Graph-Neural-Network-for-Ionic-Liquids-and-Deep-Eutectics-Solvent-Property-Prediction
+# Graph Neural Network for Ionic Liquids and-Deep Eutectics Solvent Property Prediction - A Cheminformatics Study
 A Deep Learning Framework for Predicting Physicochemical Properties of Ionic Liquids and Deep Eutectic Solvents using Message Passing Neural Networks (NNConv)
 
-## 🌍 Overview
+## Overview
 
 This project focuses on developing a **Graph Neural Network (GNN)** model based on the **Neural Network Convolution (NNConv)** architecture for the **prediction of key physicochemical properties of Ionic Liquids (ILs)**.  
 
@@ -9,26 +9,25 @@ It represents an intersection of **computational chemistry**, **cheminformatics*
 
 ---
 
-## ⚙️ Motivation
+## Motivation
 
-Ionic liquids (ILs) are versatile materials with broad applications in **green chemistry**, **energy storage**, **lubrication**, and **separation processes**. However, their vast chemical space makes experimental property measurement infeasible for all combinations.
-
-This project aims to address that challenge by developing a **data-driven predictive framework** that learns directly from molecular structures to estimate thermophysical and transport properties.
+Ionic liquids (ILs) and Deep Eutectic Solvents (DESs) are versatile materials with broad applications in **green chemistry**, **energy storage**, **lubrication**, and **separation processes**. However, their vast chemical space makes experimental property measurement infeasible for all combinations.
+This project aims to address that challenge by developing a **data-driven predictive framework** that learns directly from molecular structures to estimate physicochemical properties.
 
 ---
 
-## 🧩 Key Features
+## Key Features
 
 - **NNConv-based GNN Architecture:**  
   Implements a flexible **message passing neural network** that dynamically learns edge-conditioned transformations between atom pairs.
 
 - **Transfer Learning Extension:**  
-  The trained IL model can be fine-tuned for **Deep Eutectic Solvents (DESs)**, demonstrating model generalization across related solvent families.
+  The trained IL model was fine-tuned for training and evaluating the **Deep Eutectic Solvents (DESs)**, demonstrating that the model trained on ILs preserved most structure–property information even when moved to a new material class (DESs).
 
 - **Comprehensive Cheminformatics Integration:**  
   Utilizes tools such as **RDKit** and **OpenBabel** for:
   - Molecular graph construction  
-  - Descriptor and fingerprint generation  
+  - Node features and global features generation  
   - SMILES parsing and molecular standardization  
 
 - **Data Pipeline and Preprocessing:**  
@@ -38,25 +37,26 @@ This project aims to address that challenge by developing a **data-driven predic
 
 - **End-to-End Reproducibility:**  
   Provides all scripts and utilities to:
-  - Train the model on new datasets  
+  - Train the IL model
+  - Transfer Learning of the IL model to DESs  
   - Evaluate model performance  
   - Visualize learning curves and prediction accuracy  
 
 ---
 
-## 🧠 Model Architecture
+## Model Architecture
 
 The core architecture uses the **NNConv** layer from PyTorch Geometric to learn edge-conditioned message functions, enabling adaptive feature propagation across molecular graphs.
 
 **Highlights:**
 - Node embeddings represent atom-level features (atomic number, degree, valence, etc.)  
 - Edge embeddings represent bond information (type, conjugation, ring status, etc.)  
-- Global features incorporate molecular-level descriptors (e.g., polarity, volume, density)  
+- Global features incorporate molecular-level descriptors (e.g., polarity, molar mass, number of hydrogen donors and acceptors)  
 - Final readout combines local and global embeddings through fully connected layers
 
 ---
 
-## 📚 Technologies Used
+## Technologies Used
 
 | Category | Tools/Libraries |
 |-----------|-----------------|
@@ -68,15 +68,17 @@ The core architecture uses the **NNConv** layer from PyTorch Geometric to learn 
 
 ---
 
-## 🧮 Datasets
+## Datasets
 
-- **Primary Source:** [NIST ILThermo Database](https://ilthermo.boulder.nist.gov/)
-- **Properties Modeled:** e.g., density, viscosity, conductivity, etc.
+- **Primary IL data (training, validaton, evaluation) from:** [NIST ILThermo Database](https://ilthermo.boulder.nist.gov/)
+- **DESs density data source for transfer learning (training, validation, evaluation) from:** https://www.sciencedirect.com/science/article/pii/S0378381222002916?via%3Dihub
+- **Additional IL density data for just testing on trained IL model from:** https://pubs.acs.org/doi/suppl/10.1021/acs.iecr.9b00130/suppl_file/ie9b00130_si_001.zip
+- **Properties Modeled:** density, viscosity, conductivity, refractive index. Only density property prediction was implemented for transfer learning for now.
 - **Data Processing:** includes duplicate removal, removing outliers, removing undefined liquids, and molecular pairing, etc..
 
 ---
 
-## 📈 Results and Insights
+## Results and Insights
 
 - The model demonstrates strong predictive accuracy (high R², low MAE) across multiple IL property datasets.
 
@@ -84,7 +86,7 @@ The core architecture uses the **NNConv** layer from PyTorch Geometric to learn 
 
 ---
 
-## 🔍 Project Impact
+## Project Impact
 
 **This project has strengthened my expertise in:**
 
