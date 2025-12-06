@@ -1,0 +1,62 @@
+SEED : 42 # random number seed
+ARCH : NNConv # The model to be used
+TARGET_FEATURE_NAME : density # The target feature for prediction (viscosity, density, conductivity)
+CHARGE_MODEL : gasteiger  # 'gasteiger' for ob engine , '_GasteigerCharge' for rdkit engine
+ADD_HS : True # True for explicit hydrogen in graph, False otherwise
+NORMALIZE : True   # In getting atom features, normalize (True) force charges to sum to formal charge
+CHARGE_ENGINE : ob  # 'rdkit' or 'ob', engine for computing charges for atom in the atom features
+REMOVE_HS : False # Determines if you need explicit hydrogen in node featurizations, complementary with ADD_Hs
+USE_RBF : False  # True if you need radial basis features, False otherwise
+USE_ABF : False #  True if you need angular basis features, False otherwise
+GLOBAL_FEATURES : True # True if you want to include molecular level features, False otherwise
+NORM_GLOBAL_FEATURE : True # True if you want to normalize the features for all molecules, False otherwise
+ADD_IONIC : True # True if you want to include ionic bond as bond edges, False otherwise
+CONNECT_ALL : True # True if want all positive centers connected to negative centers in feauturizations, False otherwise
+CONDITION_NAMES : ['temperature_K', 'pressure_MPa']  # Column name(s) of external condition to use as it is named in the dataframe, None otherwise
+SPLITTER : scaffold # 'random', ''scaffold' --> options used in splitting Train, Val dataset
+NUM_GRAPHS_PER_BATCH : 128  # Number of data in each graph batch
+TRAIN_FRACTION : 0.8 # The fraction of Datasets for both Training from (Train+Valid ) dataset
+TEST_FRACTION : 0.2 # Fraction of dataset for model testing/evaluation
+CONTINUOUS_COLUMNS : ['temperature_K', 'pressure_MPa'] # Columns with continuous values used to ensure proportional distribution of data in train and test sets, None otherwise
+CATEGORICAL_COLUMNS : None # Columns with categorical values used to ensure proportional distribution of data in train and test sets, None otherwise
+STRATIFY_CONT_ONLY : True # if True → stratify only on continuous vars
+NUM_BINS : 4 # number of bins for continuous used for stratification of the dataset into (Train, Test)
+FEATURE_TRANSFORM : True # True if target feature is to be log transformed, False otherwise
+FEATURE_TRANSFORM_METHOD : log1p+robust # ['none', 'log', 'log1p', 'minmax', 'standard', 'robust', 'yeo-johnson', 'quantile']
+SCALE_CONDITIONS : True # True to scale conditions via minmax, False otherwise
+SCALE_CONDITIONS_TYPE : log1p+robust # ['minmax' ,'standard', 'robust','log+minmax', 'log1p+standard']
+REMOVE_OUTLIER : MAD # ['Z_score', 'IQR', 'log_IQR', 'MAD'], methods for handline outliers in target features and/or conditions, None otherwise
+CLEAN : True # True if loading dataframe that needs cleaning such as outlier removal etc, False otherwise
+CLEANING_FOR_TEST_SET : False # True if you have a separete dataframe for testing
+VERBOSE : True # True if you need detailed printing, False otherwise
+TESTSET_FROM_DATASET : True # True if Test set is to be drawn from dataset, False otherwise
+CREATE_RDKITMOL_COL : True # True if you want to create an rdkit mol object for each IL from its smile, False otherwise
+MIN_MAX_SCALE : True # True if you want target feature scaled to have values from 0 (min) to 1.0 (max), False otherwise
+TEST_ON_ORIGINAL_DATA : True # True if you want to test on training dataset, False if test dataset is provided
+TRAIN_MODE : True # True if you want to train, false otherwise 
+SEARCH_MODE : False
+LR : 0.001 # learning rate
+LOSS_THRESHOLD : 0.001  # This is the value below which the training stops if epoch is still below maximum epochs. 
+EMBEDDING_SIZE : [256,512,512,256]
+LINEAR_SIZE : [256,128]
+EPOCH : 20
+DEVICE : cpu # gpu
+POOLING_METHOD : mean # ['mean', 'max', 'add', 'attention', 'mean_max']. Select any of this pooling options
+LOG_EVERY : 10
+ACTION : train # [train, search_and_train, none], you either train if you have good enough parameters or serach_and_train to get them or none if you are running transfer model
+SAVE_GRAPH_LIST : True # save the preprocessed train, valid, and test lists (True)
+COMPRESS : True # True if you want train , valid, test graph list saved as .pkl.gz
+USE_SAVED_GRAPH_LIST : False # use saved graph data list (True) avoids preprocesssing afresh, otherwise (False)
+PREDICT : FALSE # Only true when predicting from a new set of dataset so that the global feateaures will be transformed accordingly
+WHICH_LIQUID : il # [il, des, predict]. 'il' if training or testing IL, des if DES. predict if strictly testing on a new set of data not you have whether il or des
+FINAL_EVAL_DATAFRAME : False # This is true only when you want final evaluation to return a dataframe of predictions and others too. Keep False unless needed
+# Transfer Learning Section 
+TRANSFER : False # True If one need to transfer learning from density to viscosity or conductivity, False otherwise
+FINE_TUNE : True # True if you want last few N_LAYERS_FINETUNE finetuned
+N_LAYERS_FINETUNE : 2 # Number of last Conv. Layers to be finetuned
+#TRANSFER_EMBEDDING_SIZE : [32, 32] # [256, 256]
+TRANSFER_LINEAR_SIZE : [256,128]
+FREEZE : True
+MODE : train              # train, extract (extract ---> o extract only embeddings and not train), none (instantiate and print model)
+LR_HEAD : 0.001            # Learning rate for the MLP layer of transfer_model
+LR_ENCODER : 0.0001         # Learning rate for the encoder Conv layers that requires Gradient 
