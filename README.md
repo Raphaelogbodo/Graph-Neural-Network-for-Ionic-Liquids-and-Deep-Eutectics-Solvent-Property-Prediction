@@ -152,21 +152,26 @@ $ python3 code/prepare_dataset.py
 $ python3 code/experiment.py
 
 Note: You have to choose the property you want to train with its data in the params.yaml file
-TARGET_FEATURE_NAME : density
-other options are -----> viscosity, conductivity, and refractive_index
+  -  TARGET_FEATURE_NAME : density
+  -  other options are -----> viscosity, conductivity, and refractive_index
 
 # For Transfer learning on DES
+
 Set in the params.yaml file
   TARGET_FEATURE_NAME : density
   TRANSFER : True 
   ACTION : train
+
 then run:
 $ python3 code/experiment.py
+
   -  Transfer learning is only implemented for density at this time for DES.
   -  All generated figures or files for transfer learning is prefixed with "transfer_"
 
 # After Training
   -  Use predict.ipynb notebook to do post training analysis and predicting new datasets of ILs as shown in the notebook.
+  -  Use the notebok as it is if you do not want to explore
+  -  If you want to explore, you can follow the examples I have in the notebook oh how I prepared a new dataset (from-GNNs-data-density-clean.csv) for prediction
 
 # I have included example bash scripts for training the model in HPC cluster
  - run_dens.sh     # density (runs both IL model training and transfer learning on DESs)
@@ -174,3 +179,8 @@ $ python3 code/experiment.py
  - run_cond.sh     # conductivity (only ILs)
  - run_refrac.sh   # refractive_index (only ILs)
 ```
+
+# Author
+Raphael N. Ogbodo
+Linkedin: linkedin.com/in/raphael-ogbodo-37ab15145
+Connect with me on Linkedin if you have any question or want to collaborate
